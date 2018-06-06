@@ -8,14 +8,87 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <h1 className="App-title">Welcome to Superior Coin</h1>
         </header>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+
         </p>
       </div>
     );
   }
+  
+  blockForNumber(numberOfBlock){
+    fetch(`http://139.162.32.245:8081/api/block/${numberOfBlock}`, {
+      Accept: 'application/json'
+    })
+      .then(res => res.json())
+      .then( (responseJson) => {
+        console.log(responseJson);
+      })
+  }
+
+  
+
+  transactions (numerOfPage,limit){
+    fetch(`http://superior-coin.com:8081/api/transactions?page=${numerOfPage}&limit=${limit}`, {
+      Accept: 'application/json'
+    })
+      .then(res => res.json())
+      .then( (responseJson) => {
+        console.log(responseJson);
+      })
+  }
+
+  InformationOfTransaction(hash){
+    fetch(`http://superior-coin.com:8081/api/transaction/${hash}`, {
+      Accept: 'application/json'
+    })
+    .then(res => res.json())
+    .then( (responseJson) => {
+      console.log(responseJson);
+    });
+  }
+
+  InformationOfTransaction(hash){
+    fetch(`http://superior-coin.com:8081/api/transaction/${hash}`, {
+      Accept: 'application/json'
+    })
+    .then(res => res.json())
+    .then( (responseJson) => {
+      console.log(responseJson);
+    });
+  }
+
+  Mempool(){
+    fetch(`http://superior-coin.com:8081/api/mempool/`, {
+      Accept: 'application/json'
+    })
+    .then(res => res.json())
+    .then( (responseJson) => {
+      console.log(responseJson);
+    });
+  }
+
+  Mempool(limit){
+    fetch(`http://139.162.32.245:8081/api/mempool?limit=${limit}`, {
+      Accept: 'application/json'
+    })
+    .then(res => res.json())
+    .then( (responseJson) => {
+      console.log(responseJson);
+    });
+  }
+
+
+ 
+
+  ///api/mempool
+
+  componentDidMount() {
+  
+    console.log("Testing this");
+  }
 }
+
 
 export default App;
