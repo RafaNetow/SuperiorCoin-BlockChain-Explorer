@@ -18,7 +18,7 @@ class App extends Component {
   }
   
   blockForNumber(numberOfBlock){
-    fetch(`http://139.162.32.245:8081/api/block/${numberOfBlock}`, {
+    fetch(`http://superior-coin.com:8081e/api/block/${numberOfBlock}`, {
       Accept: 'application/json'
     })
       .then(res => res.json())
@@ -70,7 +70,37 @@ class App extends Component {
   }
 
   Mempool(limit){
-    fetch(`http://139.162.32.245:8081/api/mempool?limit=${limit}`, {
+    fetch(`http://superior-coin.com:8081/api/mempool?limit=${limit}`, {
+      Accept: 'application/json'
+    })
+    .then(res => res.json())
+    .then( (responseJson) => {
+      console.log(responseJson);
+    });
+  }
+
+  SearchForBlockNumberBlockHashOrTxtHash(item){
+    fetch(`http://superior-coin.com:8081/api/search/${item}`, {
+      Accept: 'application/json'
+    })
+    .then(res => res.json())
+    .then( (responseJson) => {
+      console.log(responseJson);
+    });
+  }
+
+  SearchForBlockNumberBlockHashOrTxtHash(item){
+    fetch(`http://superior-coin.com:8081/api/search/${item}`, {
+      Accept: 'application/json'
+    })
+    .then(res => res.json())
+    .then( (responseJson) => {
+      console.log(responseJson);
+    });
+  }
+
+  SearchForBlockNumberBlockHashOrTxtHash(item){
+    fetch(`http://superior-coin.com:8081/api/networkinfo`, {
       Accept: 'application/json'
     })
     .then(res => res.json())
