@@ -6,6 +6,7 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import paginationFactory from 'react-bootstrap-table2-paginator';
 import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import {Router, DefaultRoute,RouteHanlder, NotFoundRoute} from "react-router";
 import _ from "lodash";
 const products = [];
 const baseUrl = 'http://superior-coin.com:8081/api';
@@ -14,9 +15,16 @@ const blockArray = [];
 class App extends Component {
 
   constructor() {
-
+   
     super();
+   
     this.state = {
+       rowEvents : {
+        onClick: (e, row, rowIndex) => {
+        console.log("entro");
+        console.log(row.hash);
+        }
+      },
       currentPage: 0,
       currency: {},
       tableData: [],
@@ -28,6 +36,7 @@ class App extends Component {
 
       ]
     };
+    
     this.transaction = this.transaction.bind(this)
     this.movePage = this.movePage.bind(this)
  
@@ -38,106 +47,14 @@ class App extends Component {
     this.transaction(0, 500);
 
 
-    /*
-    let transactionPromese = this.transaction(0,100);
-    let blocksArray = [];
-    transactionPromese.then(function(result) {
-      _.forEach(result.data.blocks, function(block){
-        blocksArray.push({
-          age: block.age,
-          hash:block.hash,
-          height:block.height,
-          time: block.timestamp_utc,
-          txs: block.txs.length        
-        });
-        });  */
   };
 
   /*
    
-   blockForNumber(numberOfBlock){
-     fetch(`http://superior-coin.com:8081e/api/block/${numberOfBlock}`, {
-       Accept: 'application/json'
-     })
-       .then(res => res.json())
-       .then( (responseJson) => {
-       })
-   }
- 
-   
- 
   
  
-   InformationOfTransaction(hash){
-     fetch(`http://superior-coin.com:8081/api/transaction/${hash}`, {
-       Accept: 'application/json'
-     })
-     .then(res => res.json())
-     .then( (responseJson) => {
-       console.log(responseJson);
-     });
-   }
- 
-   InformationOfTransaction(hash){
-     fetch(`http://superior-coin.com:8081/api/transaction/${hash}`, {
-       Accept: 'application/json'
-     })
-     .then(res => res.json())
-     .then( (responseJson) => {
-       console.log(responseJson);
-     });
-   }
- 
-   Mempool(){
-     fetch(`http://superior-coin.com:8081/api/mempool/`, {
-       Accept: 'application/json'
-     })
-     .then(res => res.json())
-     .then( (responseJson) => {
-     });
-   }
- 
-   Mempool(limit){
-     fetch(`http://superior-coin.com:8081/api/mempool?limit=${limit}`, {
-       Accept: 'application/json'
-     })
-     .then(res => res.json())
-     .then( (responseJson) => {
-     });
-   }
- 
-   SearchForBlockNumberBlockHashOrTxtHash(item){
-     fetch(`http://superior-coin.com:8081/api/search/${item}`, {
-       Accept: 'application/json'
-     })
-     .then(res => res.json())
-     .then( (responseJson) => {
-       console.log(responseJson);
-     });
-   }
- 
-   SearchForBlockNumberBlockHashOrTxtHash(item){
-     fetch(`http://superior-coin.com:8081/api/search/${item}`, {
-       Accept: 'application/json'
-     })
-     .then(res => res.json())
-     .then( (responseJson) => {
-       console.log(responseJson);
-     });
-   }
- 
-   networkInfo(item){
-     fetch(`http://superior-coin.com:8081/api/networkinfo`, {
-       Accept: 'application/json'
-     })
-     .then(res => res.json())
-     .then( (responseJson) => {
-       console.log(responseJson);
-     });
-   }
- 
    */
-
+ 
  
   transaction(pageNumber, limit) {
     const transactionUrl = `${baseUrl}/transactions?page=${pageNumber}&limit=${limit}`
@@ -192,13 +109,13 @@ class App extends Component {
             <h1 className="App-title">Welcome to BlockChain Explorer</h1>
           </header>
     
-          <BootstrapTable classes=" table-responsive  " keyField='hash' data={this.state.tableData} columns={this.state.tableColumns} filter={filterFactory()} />
+          <BootstrapTable   rowEvents={ this.state.rowEvents } classes=" table-responsive  " keyField='hash' data={this.state.tableData} columns={this.state.tableColumns} filter={filterFactory()} />
         
           
           {this.state.currentPage >0 ?(
-              <button type="button" value="-1"className="btn btn-info btn-sm" onClick = {this.movePage}>Back</button>
+              <button type="button" value="-1"className="btn  btn-danger btn-sm" onClick = {this.movePage}>Back</button>
           ): ( <div> </div>)} 
-          <label>{this.state.currentPage}</label>
+           <button type="button" className="btn btn-default btn-sm">{this.state.currentPage}</button>
            <button type="button" className="btn btn-info btn-sm" value="1" onClick ={this.movePage}>Next</button>
 
         </div>
