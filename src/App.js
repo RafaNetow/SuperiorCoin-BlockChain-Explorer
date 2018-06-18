@@ -8,7 +8,8 @@ import BootstrapTable from 'react-bootstrap-table-next';
 import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
 import {Router, DefaultRoute,RouteHanlder, NotFoundRoute} from "react-router";
 import _ from "lodash";
-import blockChainApi from "./public/services/api";
+import {networkInfo} from "./services/api.js";
+const baseUrl = 'http://superior-coin.com:8081/api';
 
 class App extends Component {
 
@@ -48,7 +49,6 @@ class App extends Component {
   };
   
   transaction(pageNumber, limit) {
-    console.log( "response" +blockChainApi.networkInfo() );
     const transactionUrl = `${baseUrl}/transactions?page=${pageNumber}&limit=${limit}`
     const that = this;
     return new Promise((resolve, reject) => {
