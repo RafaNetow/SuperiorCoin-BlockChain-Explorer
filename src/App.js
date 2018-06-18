@@ -13,15 +13,11 @@ const baseUrl = 'http://superior-coin.com:8081/api';
 
 class App extends Component {
 
-  constructor() {
-   
+  constructor() { 
     super();
-   
     this.state = {
        rowEvents : {
         onClick: (e, row, rowIndex) => {
-        console.log("entro");
-        console.log(row.hash);
         }
       },
       currentPage: 0,
@@ -34,17 +30,14 @@ class App extends Component {
       { dataField: 'hash', text: 'Hash Block', filter: textFilter() }
 
       ]
-    };
-    
+    };   
     this.transaction = this.transaction.bind(this)
     this.movePage = this.movePage.bind(this)
- 
   }
 
 
   componentDidMount() {
     this.transaction(0, 100);
-
 
   };
   
@@ -74,41 +67,28 @@ class App extends Component {
     });
   }
 
-  movePage(e){
-    console.log(e.target.value);
-    
-    const currentPage = parseInt(e.target.value) + this.state.currentPage;
-    
+  movePage(e){ 
+    const currentPage = parseInt(e.target.value) + this.state.currentPage; 
     this.transaction(currentPage,100);
-
     this.setState ({ currentPage});
-    
-
-
   }
-  /* columns={this.state.tableColumns} 
-        data={tableData} */
+
 
   render() {
     const { tableData } = this.state;
     return (
-
       <div className="App">
         <div className="container">
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
             <h1 className="App-title">Welcome to BlockChain Explorer</h1>
-          </header>
-    
-          <BootstrapTable   rowEvents={ this.state.rowEvents } classes=" table-responsive  " keyField='hash' data={this.state.tableData} columns={this.state.tableColumns} filter={filterFactory()} />
-        
-          
+          </header>  
+          <BootstrapTable   rowEvents={ this.state.rowEvents } classes=" table-responsive  " keyField='hash' data={this.state.tableData} columns={this.state.tableColumns} filter={filterFactory()} />                
           {this.state.currentPage >0 ?(
               <button type="button" value="-1"className="btn  btn-danger btn-sm" onClick = {this.movePage}>Back</button>
           ): ( <div> </div>)} 
            <button type="button" className="btn btn-default btn-sm">{this.state.currentPage}</button>
            <button type="button" className="btn btn-info btn-sm" value="1" onClick ={this.movePage}>Next</button>
-
         </div>
       </div>
     );

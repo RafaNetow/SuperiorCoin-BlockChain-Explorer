@@ -1,6 +1,6 @@
 const baseUrl = 'http://superior-coin.com:8081/api';
 
-export function blockForNumber(numberOfBlock) {
+export function searchBlockchain(numberOfBlock) {
    return fetch(`${baseUrl}/block/${numberOfBlock}`);
 }
 
@@ -10,9 +10,6 @@ export function InformationOfTransaction(hash) {
             Accept: 'application/json'
         });
     }
-
-
-
 
 export function Mempool(limit) {
     return fetch(`${baseUrl}/mempool?limit=${limit}`, {
@@ -25,7 +22,6 @@ export function SearchForBlockNumberBlockHashOrTxtHash(item) {
             Accept: 'application/json'
         });
 }
-
 
 export function networkInfo() {
     return new Promise(
