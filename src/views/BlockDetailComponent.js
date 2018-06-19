@@ -13,7 +13,6 @@ export default class BlockComponent extends Component {
 
     componentDidMount() {
         searchBlockchain(this.props.routeParams.height).then((data) => {
-            console.log(data)
             let nextState = this.state;
             nextState.block = data.data.data
             this.setState(nextState)
